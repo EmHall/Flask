@@ -1,5 +1,8 @@
 import os
 import json
+from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
+
 from flask import Flask, render_template, request, flash
 if os.path.exists("env.py"):
     import env
@@ -8,6 +11,9 @@ if os.path.exists("env.py"):
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
 
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.secret_key = os.environ.get("SECRET_KEY")
 
 @app.route("/")
 def index():
